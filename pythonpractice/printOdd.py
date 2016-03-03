@@ -1,0 +1,1 @@
+print(list(filter(lambda x:x if x%2==0 else None, list(range(100)))))
