@@ -1,10 +1,16 @@
 #! python
 # encoding: utf-8
 import os
+#import subprocess
 
-root_path = 'D://share/sqlcutover/'
+root_path = 'D:/share/sqlcutover/'
 
-OLLRSPM = '''(DESCRIPTION=(ADDRESS = (PROTOCOL = TCP)(HOST = hln2279p.oocl.com)(PORT = 1521))(CONNECT_DATA =(SERVER = DEDICATED)(SERVICE_NAME = ollrsprd.oocl)))'''
+TNS_OLLRSPM = '''(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=hln2279p.oocl.com)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=ollrsprd.oocl)))'''
+
+SCRIPTFILE = 0
+DBNAME = 1
+DBSCHEMA = 2
+SEQUENCE = 3
 
 def parse_parm(path):
     items = []
@@ -21,26 +27,36 @@ def parse_parm(path):
     return items
 
 def show_menu(items):
-    print 'sequence\t', 'db\t\t\t', 'schema\t\t\t\t\t', 'script\t'
+    print 'sequence'.ljust(10), 'db'.ljust(20), 'schema'.ljust(30), 'script'
     for item in items:
-        print item[3], '\t\t', item[1], '\t\t', item[2], '\t\t', item[0]
-    print len(items), '\t\t', 'Exit'
+        print str(item[3]).center(10), item[1].ljust(20), item[2].ljust(30), item[0]
+    print str(len(items)).center(10), 'Exit'
 
 def execute_item(item):
-    print 'executing ', item
-    cmd = 'sqlplus '+item[2]+'/ollrspm@'+ '//hln2279p.oocl.com:1521/ollrsprd.oocl' + ' @'+root_path+item[0]
-    print cmd
+    file = ' @'+root_path+item[SCRIPTFILE]
+    cmd = 'echo exit | sqlplus -S '+item[DBSCHEMA]+'/ollrspm@'+ TNS_OLLRSPM + ' @' + file
+    #print cmd
+    os.chdir(root_path)
+    #os.system('cd')
     os.system(cmd)
+    #subprocess.call(cmd)
 
 def start():
     items = parse_parm(root_path)
     show_menu(items)
     while True:
         s = raw_input('Select item to cutover:')
-        i = int(s)
-        if i < 0 or i >= len(items):
-            break
-        execute_item(items[i])
+        try:
+            i = int(s)
+            if i == len(items):
+                print 'User select exit.'
+                break
+            if i < 0 or i > len(items):
+                print 'Please select item from above menu!'
+                continue
+            execute_item(items[i])
+        except :
+            print 'Please input correct integer!'
 
     
 if __name__ == '__main__':
