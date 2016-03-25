@@ -79,7 +79,9 @@ def main():
     #test_datetime()
     #test_dateutil()
     #get_previous_byday('Saturday')
-    iter_month_date()
+    #iter_month_date()
+    import pytz
+    print pytz.country_timezones['CN']
 
 if __name__ == '__main__':
     main()
