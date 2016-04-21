@@ -14,8 +14,22 @@ def test_class_string():
 	p = Pair(3, 4)
 	print p
 	print repr(p)
+
+def test_context():
+    class MyContext:
+        def __init__(self):
+            print 'initial context'
+        def __enter__(self):
+            print 'enter context...'
+
+        def __exit__(self, exc_ty, exc_val, tb):
+            print 'exit context...'
+
+    with MyContext() as con:
+    	print 'using context...'
 def main():
-	test_class_string()
+	# test_class_string()
+	test_context()
 
 if __name__ == '__main__':
 	main()
