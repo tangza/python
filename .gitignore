@@ -1,1 +1,9 @@
-pythonpractice/pythoncookbook/iterator_generator/test_iterator.pyc
+*.pyc
+
+fluentpython/Include
+fluentpython/Lib
+fluentpython/Scripts
+fluentpython/tcl
+fluentpython/share
+fluentpython/etc
+fluentpython/pip-selfcheck.json
