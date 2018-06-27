@@ -2,24 +2,25 @@
 # -*- coding: utf8 -*-
 import os, urllib2, re, urllib
 
-#path = "."
+def list_dirfile():
+    path = "."
 
-#def listBasename(folder):
-#	for fname in os.listdir(folder):
-#		#print(fname[:fname.rindex('.')])
-#		#print((lambda f: f[:f.rindex('.')])(fname))
-#		print fname
-#	print('-' * 20)
+    def listBasename(folder):
+    	for fname in os.listdir(folder):
+    		#print(fname[:fname.rindex('.')])
+    		#print((lambda f: f[:f.rindex('.')])(fname))
+    		print fname
+    	print('-' * 20)
 
-##listBasename('.')
-#def localAreaFileList(folder):
-#	print folder
-#	#os.system(r"net use n: //10.222.1.149/share")
-#	listBasename(folder)
-#localAreaFileList('//kwokph-3-w7/DBCR/LLPRPT')
+    #listBasename('.')
+    def localAreaFileList(folder):
+    	print folder
+    	#os.system(r"net use n: //10.222.1.149/share")
+    	listBasename(folder)
+    localAreaFileList('//kwokph-3-w7/DBCR/LLPRPT')
 
-#print help(zip)
-#print [x^y for x, y in zip(a, b)]
+    print help(zip)
+    print [x^y for x, y in zip(a, b)]
 
 def test():
     con=urllib2.urlopen('http://quote.eastmoney.com/hk/00700.html?from=BaiduAladdin')
@@ -48,4 +49,7 @@ if __name__ == '__main__':
     #main()
     #print help(namedtuple)
     #test()
-    print 37520453.0 / 1024 / 1024
+    #print 37520453.0 / 1024 / 1024
+    for i in 'hih':
+        print i,
+    print '\n', i

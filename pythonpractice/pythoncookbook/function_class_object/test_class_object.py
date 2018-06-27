@@ -16,7 +16,7 @@ def test_class_string():
 	print repr(p)
 
 def test_context():
-    class MyContext:
+    class MyContext(object):
         def __init__(self):
             print 'initial context'
         def __enter__(self):
@@ -27,6 +27,7 @@ def test_context():
 
     with MyContext() as con:
     	print 'using context...'
+        print MyContext.__mro__
 def main():
 	# test_class_string()
 	test_context()
